@@ -13,6 +13,7 @@ function App() {
   };
 
   const addTask = () => {
+    
     if (newTask === null || newTask === undefined || newTask.trim() === '') {
       alert("Enter some text");
       return; // Exit the function if the input is invalid

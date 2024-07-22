@@ -22,6 +22,16 @@
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
 
+.excuse button {
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  background-color: #4681f4;
+  color: #fff;
+  cursor: pointer;
+}
+
 .addTask button {
   padding: 10px 20px;
   font-size: 16px;
@@ -30,6 +40,10 @@
   background-color: #4681f4;
   color: #fff;
   cursor: pointer;
+}
+
+.excuse button:hover {
+  background-color: #28488a;
 }
 
 .addTask button:hover {

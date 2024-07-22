@@ -1,12 +1,25 @@
 import './App.css';
 import { useState } from 'react';
+import { useEffect } from 'react';
 // import { User } from './components/User';
 import { Task } from './components/Task';
+import Axios from 'axios';
+import { BrowserRouter as Router, Routes, Route } from 'react';
 
 function App() {
 
   const[todoList, setTodoList] = useState([]);
   const[newTask, setNewTask]   = useState("");
+  const[quote, setQuote]       = useState("");
+
+  const dailyQuote = () => {
+      Axios.get(`https://excuser-three.vercel.app/v1/excuse/`)
+      .then((res)=>setQuote(res.data[0].excuse));
+  }
+
+  useEffect(()=>{
+    dailyQuote();
+  },[]);
 
   const handleInputChange = (e) => {
     setNewTask(e.target.value);
@@ -17,6 +30,13 @@ function App() {
     if (newTask === null || newTask === undefined || newTask.trim() === '') {
       alert("Enter some text");
       return; // Exit the function if the input is invalid
+    }
+
+    // Check if the task already exists in todoList
+    const taskExists = todoList.some(task => task.taskName === newTask);
+    if (taskExists) {
+      alert("The task already exists");
+      return; // Exit the function if the task already exists
     }
 
     const task = {
@@ -112,6 +132,10 @@ function App() {
                   );
                 })}
               </table>
+              <div className="excuse">
+                <button onClick={dailyQuote}>Excuse from Tasks :D</button>
+                <p>{quote}</p>
+              </div>
         </div>
         {/* {users.map((user, key) => {
           return(
